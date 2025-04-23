@@ -1,0 +1,526 @@
+html, body { 
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* Die Hintergrund-Zeile entfernt: 
+     background: url('...') center / cover no-repeat; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'zabras', Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.play-regular {
+  font-family: "Play", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.play-bold {
+  font-family: "Play", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+h1 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Play', serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  z-index: 1002;
+  margin: 0;
+  text-align: center;
+}
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 1rem; 
+  }
+}
+@media only screen and (max-height: 480px) {
+  h1 {
+    display: block !important;
+  }
+}
+:fullscreen h1,
+:-webkit-full-screen h1,
+:-moz-full-screen h1,
+:-ms-fullscreen h1 {
+  display: block !important;
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  max-width: 720px; 
+  height: 100%;
+  min-width: 310px;
+  max-height: 480px;
+  background-color: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  #game-container {
+    width: 90%;
+    height: auto;
+    max-height: 400px;
+    margin-top: 80px; 
+  }
+}
+@media (max-width: 480px) {
+  #game-container {
+    width: 85%;
+    max-height: 350px;
+    margin-top: 100px;
+  }
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: block;
+}
+
+#game-container:fullscreen,
+#game-container:-webkit-full-screen,
+#game-container:-moz-full-screen,
+#game-container:-ms-fullscreen {
+  width: 100%;
+  height: 100%;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+:fullscreen canvas,
+:-webkit-full-screen canvas,
+:-moz-full-screen canvas,
+:-ms-fullscreen canvas {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+  background: black; 
+}
+
+#impressum1 {
+  position: absolute !important;
+  bottom: 30px !important;
+  left: 30px !important;
+  color: white !important;
+  font-size: 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  z-index: 1003 !important; 
+}
+@media (max-width: 800px) {
+  #impressum1 {
+    top: 10px !important;
+    left: 10px !important;
+    bottom: auto !important;
+    font-size: 14px !important;
+  }
+}
+
+#startscreen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: url('img_pollo_locco/img/9_intro_outro_screens/start/startscreen_1.png')
+              center center / cover no-repeat;
+}
+
+button {
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #4caf50, #2e8b57);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #5bda60, #37a147);
+}
+button:active {
+  transform: scale(0.95);
+}
+
+#startButton {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+}
+
+#fullscreenButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1001;
+  font-size: 0.9rem;
+}
+#muteButton {
+  position: absolute;
+  bottom: -5px;
+  left: -5px;
+  z-index: 1008;
+  font-size: 8px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.overlay-text {
+  font-size: 2rem;
+  color: #ffef00;
+  text-shadow: 1px 1px 4px #000;
+  margin-bottom: 20px;
+}
+.button-container,
+#winBtnContainer,
+#lostBtnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.controls-info {
+  position: absolute;
+  bottom: 10px;
+  width: 50%;
+  margin: 0 auto;
+  color: black;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  #startButton {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  button {
+    font-size: 0.9rem;
+  }
+  .controls-info {
+    position: absolute;
+    bottom: 10px;
+    width: 25%;
+    margin: 0 auto;
+    color: black;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .overlay-text {
+    font-size: 1.5rem;
+  }
+  .controls-info {
+    bottom: 10px;
+    width: 20%;
+    font-size: 12px;
+  }
+}
+@media (max-width: 480px) {
+  button {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+  .overlay-text {
+    font-size: 1.3rem;
+  }
+}
+
+#touch-controls {
+  display: none;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+}
+#touch-controls button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+}
+#touch-controls button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+:fullscreen #touch-controls,
+:-webkit-full-screen #touch-controls,
+:-moz-full-screen #touch-controls,
+:-ms-fullscreen #touch-controls {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (min-width: 801px) {
+  #touch-controls {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #touch-controls {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  #muteButton {
+    display: block !important;
+  }
+  :fullscreen #muteButton,
+  :-webkit-full-screen #muteButton,
+  :-moz-full-screen #muteButton,
+  :-ms-fullscreen #muteButton {
+    display: block !important;
+  }
+}
+@media (max-width: 500px) {
+  #touch-controls button {
+    width: 15px;
+    height: 15px;
+    font-size: 0.3rem;
+  }
+}
+
+.help-btn {
+  position: absolute;
+  top: 10px;
+  right: 150px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.help-btn:hover {
+  background-color: transparent;
+}
+.help-dialog {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(255, 230, 180, 0.95);
+  width: 600px;
+  max-width: 90%;
+  max-height: 90%;
+  z-index: 9999;
+  overflow: auto;
+}
+.help-dialog::backdrop {
+  background: rgba(0,0,0,0.5);
+}
+.dialog-container {
+  background-color: #eec386;
+  overflow: auto;
+  padding: 20px;
+  max-height: 440px;
+  display: flex;
+  flex-direction: column;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: #d9534f;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover {
+  background: #c9302c;
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.custom-table tr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.icons-column {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icons-column img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.text-column {
+  flex: 1;
+  text-align: left;
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .help-dialog {
+    max-width: 95%;
+    max-height: 75vh;
+  }
+  .icons-column img {
+    width: 30px;
+    height: 30px;
+  }
+  .text-column {
+    font-size: 14px;
+  }
+  .close-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
+
+#orientationMessage {
+  width: 100%;
+  height: 100vh;
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0px;
+}
+#orientationMessage a {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 20px;
+  display: block;
+}
+
+dialog::-webkit-scrollbar,
+.dialog-container::-webkit-scrollbar {
+  width: 12px;
+}
+dialog::-webkit-scrollbar-track,
+.dialog-container::-webkit-scrollbar {
+  background: rgb(255, 255, 255);
+}
+dialog::-webkit-scrollbar-thumb,
+.dialog-container::-webkit-scrollbar {
+  background-color: #ce5b35;
+  border-radius: 25px;
+  border: 3px solid rgb(255, 255, 255);
+}
+
+.instructions {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  font-size: 20px; 
+  font-family: Arial, sans-serif;
+}
+@media (max-width: 800px) {
+  .instructions {
+    font-size: 16px;
+  }
+}
+@media (max-width: 500px) {
+  .instructions {
+    font-size: 14px;
+  }
+}
+@media (max-width: 350px) {
+  .instructions {
+    font-size: 12px;
+  }
+}
+
+
+.bg-fix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url('img_pollo_locco/img/9_intro_outro_screens/start/desert_Backgound.jpg')
+              center center / cover no-repeat;
+}
+@media only screen and (min-width: 801px) {
+  #touch-controls {
+    display: none !important;
+  }
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  #touch-controls {
+    display: none !important;
+  }
+}
+
+@media (any-hover: none), (any-pointer: coarse) {
+  #touch-controls {
+    display: flex !important;
+  }
+}

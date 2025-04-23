@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="icon" type="image/x-icon" href="img_pollo_locco/img/6_salsa_bottle/salsa_bottle.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Tiny5&display=swap" rel="stylesheet">
+
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/miniChicken.class.js"></script>
+    <script src="models/chicken.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/status-bar.class.js"></script>
+    <script src="models/status-bar-endboss.class.js"></script>
+    <script src="models/coin_status-bar.js"></script>
+    <script src="models/bottle_status-bar.js"></script>
+    <script src="models/bottle.js"></script>
+    <script src="models/coin.js"></script>
+   
+    <script src="models/specialatack.js"></script>
+    <script src="models/egg.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/world_features.class.js"></script>
+    
+    <script src="models/background-object.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/throwable-object-SP-AT.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js" defer></script>
+    <script src="game_responsive.js"></script>
+    </style>
+
+</head>
+<body>
+
+ <div class="bg-fix"></div>
+
+ <h1 class="play-bold">El Pollo Loco</h1>
+
+ <div>
+   <a href="impressum.html" id="impressum1" class="position-absolute" style="color:white; align-items:center;font-size:20px; display:flex; justify-content: center; flex-direction: column; font-weight:bold;left:30px; bottom:30px; text-decoration:none; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+     Impressum
+   </a>
+ </div>
+
+  <div id="orientationMessage">
+    <p>Please rotate your device to play the game.</p>
+  
+</div>
+
+    <div id="game-container">
+      <div id="touch-controls">
+        <button id="btn-left">
+          <img src="img_pollo_locco/img/2_character_pepe/2_walk/left-arrow.png" alt="Left" style="width:100%; height:100%;">
+        </button>
+        <button id="btn-right">
+          <img src="img_pollo_locco/img/2_character_pepe/2_walk/right-arrow.png" alt="Right" style="width:100%; height:100%;">
+        </button>
+        <button id="btn-jump">
+          <img src="img_pollo_locco/img/2_character_pepe/2_walk/up-arrow.png" alt="Jump" style="width:100%; height:100%;">
+        </button>
+        <button id="btn-throw">
+          <img src="img_pollo_locco/img/6_salsa_bottle/salsa_bottle.png" alt="Throw" style="width:100%; height:100%;">
+        </button>
+        <button id="btn-enter">
+          <img src="img_pollo_locco/img/6_salsa_bottle/bottle_rotation/grenade.png.png" alt="SP" style="width:100%; height:100%;">
+        </button>
+      </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <button id="muteButton" style=>
+          <img src="audio/turn_on_sound.png" width="8" alt="Turn Off Sound">
+  
+          <button id="fullscreenButton" style="position: absolute; top: 10px; right: 10px; z-index: 1001;">
+            Full screen
+        </button>
+      
+        <div id="startscreen">
+            <button id="startButton" style="    padding: 15px 30px;
+            font-size: 14px;
+            color: green;
+            background-color: #4CAF50; 
+            border: none;
+            color: white;
+           
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+           ">Start game</button>
+
+<button id="helpButton" class="help-btn"> Task</button>
+
+
+<dialog id="helpDialog" class="help-dialog">
+  <div class="dialog-container flex align-center position-relative flex-column">
+    <h2>Your task</h2>
+
+    <button
+      id="closeDialogBtn"
+      class="close-btn position-absolute"
+    >
+    X
+    </button>
+
+    <div class="flex" style="gap: 15px; padding: 20px 50px 20px 20px">
+      
+
+      <table class="custom-table">
+        <tr>
+          <td class="icons-column"></td>
+          <td class="text-column">
+            <b>Defeat the endboss with bottles or by using Pepes special atack to win! – Let's go!</b>
+          </td>
+        </tr>
+        <tr>
+          <td class="icons-column">
+        
+            <img 
+              class="coin" 
+              src="img_pollo_locco/img/8_coin/coin_1.png" 
+              alt="Coin" 
+            />
+          </td>
+          <td class="text-column">
+            <b>Collect</b> all coins to unlocked Pepe's special atack
+          </td>
+        </tr>
+        <tr>
+          <td class="icons-column">
+       
+            <img
+              class="tabasco"
+              src="img_pollo_locco/img/6_salsa_bottle/salsa_bottle.png"
+              alt="Tabasco Bottle"
+            />
+          </td>
+          <td class="text-column">
+            <b>Collect</b> chilli bottles to defeat your enemies. 
+            You can collect a maximum of 18 bottles
+          </td>
+        </tr>
+      </table>
+      
+    
+      <table class="custom-table">
+        <tr>
+        <td class="icons-column">
+       
+          <img
+            class="egg"
+            src="img_pollo_locco/img/4_enemie_boss_chicken/3_attack/egg.png"
+            alt="Egg"
+          />
+        </td>
+
+        <td class="text-column">
+          <b>Special Atack : Egg –</b> Secret weapon of Endboss <b>5 eggs to throw on character</b>
+        </td>
+      </tr>
+
+      <td class="icons-column">
+       
+        <img
+          class="granade"
+          src="img_pollo_locco/img/6_salsa_bottle/bottle_rotation/grenade.png.png"
+          alt="granade"
+        />
+      </td>
+
+      <td class="text-column">
+        <b>Special Atack : Granade –</b> Secret weapon of Pepe <b>you can use it only one time if you collect all coins </b>
+      </td>
+    </tr>
+          <td class="icons-column">
+            
+            <img
+              class="miniChicken"
+              src="img_pollo_locco/img/3_enemies_chicken/chicken_small/1_walk/2_w.png"
+              alt="MiniChicken"
+            />
+          </td>
+          <td class="text-column">
+            <b>ENEMY 1:</b> Defeated by
+            <b>1 hit</b> (jumping ,chilli bottle or special atack)
+            <b>watch out</b> this creatures are very small so it s important to jump with precision
+          </td>
+        </tr>
+        <tr>
+          <td class="icons-column">
+           
+            <img
+              class="chicken"
+              src="img_pollo_locco/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png"
+              alt="Chicken"
+            />
+          </td>
+          <td class="text-column">
+            <b>ENEMY 2:</b> Defeated by
+            <b>1 hit</b> (jumping, chilli bottle or special atack)
+          </td>
+        </tr>
+        <tr>
+          <td class="icons-column">
+       
+            <img
+              class="endboss"
+              src="img_pollo_locco/img/4_enemie_boss_chicken/1_walk/G1.png"
+              alt="Endboss"
+            />
+          </td>
+          <td class="text-column">
+            <b>ENEMY 3: Endboss –</b> Defeated by <b>15 hits</b> with chilli bottles or by using Pepe's  special atack.
+            But watch out: The endboss can throw eggs , be faster or jump if you make him angry.
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</dialog>
+
+        </div>
+    <audio class="media" src="audio/footsteps_character.mp3" loop></audio>
+    <div class="controls-info"></div>
+  </div>
+      
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fullscreenButton = document.getElementById('fullscreenButton');
+      const gameContainer    = document.getElementById('game-container');
+
+      
+      if (fullscreenButton) {
+        fullscreenButton.addEventListener('click', () => {
+          toggleFullscreen();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          if (gameContainer.requestFullscreen) {
+            gameContainer.requestFullscreen();
+          } else if (gameContainer.webkitRequestFullscreen) {
+            gameContainer.webkitRequestFullscreen();
+          } else if (gameContainer.mozRequestFullScreen) {
+            gameContainer.mozRequestFullScreen();
+          } else if (gameContainer.msRequestFullscreen) {
+            gameContainer.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+      }
+    });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const helpBtn     = document.getElementById('helpButton');
+        const helpDialog  = document.getElementById('helpDialog');
+        const closeDialog = document.getElementById('closeDialogBtn');
+        helpBtn.addEventListener('click', () => {
+          helpDialog.showModal();
+        });
+
+        closeDialog.addEventListener('click', () => {
+          helpDialog.close();
+        });
+    
+      
+        helpDialog.addEventListener('click', (e) => {
+          const dialogDimensions = helpDialog.getBoundingClientRect();
+          if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+          ) {
+            helpDialog.close();
+          }
+        });
+      });
+    </script>
+    <script>
+      function checkOrientation() {
+          let message = document.getElementById("orientationMessage");
+          let game = document.getElementById("game-container");
+          if (window.innerHeight > window.innerWidth) {
+              message.style.display = "flex";
+              game.style.display = "none";
+          } else {
+              message.style.display = "none";
+              game.style.display = "flex";
+          }
+      }
+
+      window.addEventListener("load", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
+  </script>
+</body>
+</html>
